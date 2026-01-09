@@ -20,7 +20,7 @@ parser.add_argument('-e', '--report-every', type=int,
 
 parser.add_argument('-i', '--inputFiles', nargs='+',
     help='List of EDM input files ("file:" prefix added automatically for local files; arguments passed to glob for wildcard resolution)',
-    default=['/eos/cms/store/data/Run2025F/HLTPhysics/RAW/*/*/397/638/*/*.root'])
+    default=['/eos/cms/store/data/Run2025G/EphemeralHLTPhysics*/RAW/*/*/398/183/*/*.root'])
 
 parser.add_argument('-a', '--l1t-algorithms', nargs='+',
     help='List of L1T algorithms',
