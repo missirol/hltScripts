@@ -14,4 +14,3 @@ if [ $# -ge 1 ]; then
 else
   cmsRun "${CONFIGDIR}"/test_l1tGlobalProducer_cfg.py -n 100
 fi
-
