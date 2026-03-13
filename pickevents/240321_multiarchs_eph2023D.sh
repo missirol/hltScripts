@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/bin/bash -ex
+
+SCRIPTDIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+OUTDIR="${SCRIPTDIR}"/files
+
+mkdir -p "${OUTDIR}"
+cd "${OUTDIR}"
 
 cat <<@EOF > tmp.txt
 370293:207:367006439
@@ -28,11 +34,8 @@ cat <<@EOF > tmp.txt
 
 NEVTMAX=$(cat tmp.txt | wc -l)
 
-edmPickEvents.py "/EphemeralHLTPhysics0/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph0
-edmPickEvents.py "/EphemeralHLTPhysics1/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph1
-edmPickEvents.py "/EphemeralHLTPhysics2/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph2
-edmPickEvents.py "/EphemeralHLTPhysics3/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph3
-edmPickEvents.py "/EphemeralHLTPhysics4/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph4
-edmPickEvents.py "/EphemeralHLTPhysics5/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph5
-edmPickEvents.py "/EphemeralHLTPhysics6/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph6
-edmPickEvents.py "/EphemeralHLTPhysics7/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output eph7
+for nnn in {0..7}; do
+  edmPickEvents.py "/EphemeralHLTPhysics${nnn}/Run2023D-v1/RAW" tmp.txt --runInteractive --maxEventsInteractive "${NEVTMAX}" --output pickEvents_Run2023D_EphemeralHLTPhysics"${nnn}"
+done; unset nnn
+
+rm -f tmp.txt
