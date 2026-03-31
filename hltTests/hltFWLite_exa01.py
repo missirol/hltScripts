@@ -24,6 +24,7 @@ def analyse_event(event, verbosity=0):
       print('Run             =', event.eventAuxiliary().run())
       print('LuminosityBlock =', event.eventAuxiliary().luminosityBlock())
       print('Event           =', event.eventAuxiliary().event())
+      print('Orbit           =', event.eventAuxiliary().orbitNumber())
       print('-'*50)
 
     if verbosity >= 0:
