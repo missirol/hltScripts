@@ -23,6 +23,8 @@ process.source.eventsToProcess = cms.untracked.VEventRange('370293:251:468657001
 
 process.hltOutputMinimal.outputCommands = [
   'keep *_TriggerResults_*_HLTX',
+  'keep *_hltSiPixelRecHitsFromLegacyPPOnAA_*_*',
+  'keep *_hltSiPixelRecHitsPPOnAA_*_*',
   'keep *_hltSiPixelClustersPPOnAA_*_*',
   'keep *_hltSiPixelDigisPPOnAA_*_*',
   'keep *_hltSiPixelDigiErrorsPPOnAA_*_*',
@@ -42,11 +44,16 @@ if hasattr(process, 'hltPixelConsumerGPUPPOnAA'):
 
 del process.MessageLogger
 process.load('FWCore.MessageLogger.MessageLogger_cfi')
+
+#process.options.accelerators = ['cpu']
+
+#if process.hltPixelTracksPPOnAA.type_() == 'PixelTrackProducerFromSoAHIonPhase1':
+#    process.hltPixelTracksPPOnAA.pixelRecHitLegacySrc = 'hltSiPixelRecHitsFromLegacyPPOnAA'
 @EOF
 
   cmsRun "${1}".py &> "${1}".log
   mv output.root "${1}".root
 }
 
-run cmshlt3284_hlt1 /dev/CMSSW_14_0_0/HIon/V173
-run cmshlt3284_hlt2 /users/soohwan/HLT_140X/Alpaka/HIonV173/V10
+run cmshlt3284_cpu_hlt1 /dev/CMSSW_14_0_0/HIon/V173
+run cmshlt3284_cpu_hlt2 /users/soohwan/HLT_140X/Alpaka/HIonV173/V10
