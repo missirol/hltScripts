@@ -108,7 +108,7 @@ def main():
         sys.exit(1)
 
     print(f"### TFile {fname}")
-    walk(f, fname, 100)
+    walk(f, fname, 1000)
     f.Close()
 
 if __name__ == "__main__":
